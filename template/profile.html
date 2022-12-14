@@ -1,0 +1,18 @@
+{% extends 'base/defualt.html'%}
+
+{% block content %}
+    <form method="get">
+        {{ filter.form.as_p }}
+        <input type="submit" />
+    </form>
+
+     {% for obj in filter.qs %}
+
+         {{ obj.abs.title }} <br />  <br/>
+         {{ obj.user }}  <br /> <br /> 
+         {{ obj.text }} <br />
+         <a   type="button"  href = {% url 'success_button' obj.pk %}> Принять!</a>
+         <a   type="delete"  href = {% url 'success_button' obj.pk %}> Удалить!</a>
+
+     {% endfor %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base/defualt.html'%}
+
+{% block title %}
+    signup
+{% endblock %}
+
+{% block content %}
+    <form method="post" action="{% url 'signup' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="btn btn-success" value="Registration"> </bytton>
+    </form>
+
+{% endblock %}

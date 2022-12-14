@@ -1,0 +1,11 @@
+{% extends 'base/defualt.html'%}
+
+
+{% block content %}
+<form method="post"  enctype="multipart/form-data"  action="{% url 'create_post'%}"   >
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="btn btn-success" value="Create new Post"> </bytton>
+</form>
+
+{% endblock %}

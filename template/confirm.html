@@ -1,0 +1,14 @@
+{% extends 'base/defualt.html'%}
+
+{% block content %}
+
+<form method="post" action="{% url 'confirm' %}">
+    {% csrf_token %}
+    <input type="text" name="code">
+    <input type="submit" class="btn btn-success" value="Enter!" />
+</form>
+
+{% endblock %}
+
+
+

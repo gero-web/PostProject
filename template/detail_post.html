@@ -1,0 +1,86 @@
+{% extends 'base/defualt.html'%}
+
+{% block content %}
+
+
+  
+
+
+
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'comment.css' %}">
+<div class="container">
+  <div class="row">
+    
+    <div class="col-sm-10 col-sm-offset-1" >
+        <div class="col-sm-10 col-sm-offset-1" >
+            <div class="card text-center reviews">
+                <div class="card-header">
+                    {{ post.user}}
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title"> {{ post.title}}</h5>
+                  <p class="card-text"> {{post.text}}</p>
+               
+                </div>
+                <div class="card-footer text-muted ">
+                
+                </div>
+            </div>
+            {% if user.is_authenticated %}
+                <form action="/comment/" method="post" class="form-horizontal" id="commentForm" role="form"> 
+                    {% csrf_token%}
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">Comment</label>
+                        <div class="col-sm-10">
+                           
+                        <textarea  class="form-control" name="text" id="addComment" rows="5" ></textarea>
+                        <input  hidden  name="abs" value="{{post.pk}}"  />
+                        </div>
+                    </div>
+                
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">                    
+                            <button class="btn btn-success btn-circle text-uppercase " type="submit" id="submitComment"><span class="glyphicon glyphicon-send"></span> Summit comment</button>
+                        </div>
+                    </div>            
+                </form>
+            {% endif %}
+        <div class="comment-tabs">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="active"><a href="#comments-logout" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">Comments</h4></a></li>
+             
+            </ul>            
+            <div class="tab-content">
+                <div class="tab-pane active" id="comments-logout">                
+                    <ul class="media-list">
+                      <li class="media">
+                      
+                     {% for comment in commets %}
+                        <div class="media-body">
+                          <div class="well well-lg">
+                              <h4 class="media-heading text-uppercase reviews">{{comment.user}} </h4>
+                              <p class="media-comment">
+                                {{ comment.text }}
+                              </p>
+                             </div>              
+                        </div>
+                        {% empty %}
+                        <p>No comment yet.</p>
+                    {% endfor %}            
+                        
+                </div>   
+            </div>
+        </div>
+	</div>
+  </div>
+             
+     
+  
+</div>
+{% endblock %}
+
+
+

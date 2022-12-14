@@ -1,0 +1,30 @@
+{% extends 'base/defualt.html'%}
+
+{% block title %}
+    registration
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<a href="{% url 'profile' %}" class="btn btn-success"> Profile </a>
+<a href="{% url 'create_post' %}" class="btn btn-success"> Новый пост </a>
+{% endif %}
+    <ul>
+    {% for post in posts %}
+    <div class="card text-center reviews">
+        <div class="card-header">
+            {{ post.user }}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"> {{ post.title}}</h5>
+          <p class="card-text"> {{ post.text }}</p>
+        </div>
+        <div class="card-footer text-muted ">   
+            <a href="{% url 'detail' post.pk %}" class="btn btn-success"> Подробней </a>
+        </div>
+    </div>    
+        {% empty %}
+        <li>No articles yet.</li>
+    {% endfor %}
+    </ul>
+{% endblock %}
